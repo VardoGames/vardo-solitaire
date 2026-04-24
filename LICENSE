@@ -1,0 +1,57 @@
+# Terms for “Solitaire (Klondike)” — Vardo Games
+
+*This file states how you may use the **game** and the **source code** in this repository. It is not legal advice. For commercial questions, contact the rights holder.*
+
+---
+
+## 1. The game (binary / store build)
+
+- The **game** is and must remain **free to players** (no charge for the application as we distribute it).
+- **You may not** use the **game, its assets, or its branding** in **commercial** ways (including selling, sublicensing for money, or using as part of a paid product) **without prior written permission** from the rights holder.
+- The game is provided **“as is”**, without warranty of any kind, express or implied, including but not limited to fitness for a particular purpose. See also Section 5.
+
+## 2. Source code in this repository
+
+- **You may** view, copy, and modify the **source code** in this repository for **non-commercial** purposes (e.g. personal learning, private study, and non-profit projects that do not generate revenue).
+- **You may not** use the **source code** (including modified versions) for **commercial** purposes **without** prior **written** permission from the rights holder. That includes, without limitation, selling software, using it in paid services, or in products sold for profit.
+- Redistributing **source** or **derivatives** of this code (even non-commercially) is allowed only if you keep these terms and do not suggest endorsement by Vardo Games; you must not remove or hide this license file.
+
+## 3. Trademarks and brand
+
+- The **name** “Vardo Games”, the **Vardo** trade name, and all **logos and marks** of Vardo Games (including those shown in the game and repository) are the **property of Vardo** (or its designated company) and are **not** licensed to you for use in your own products, services, or marketing **without** prior **written** permission, except for fair use (e.g. factually describing that your fork is “based on” this project) where applicable law allows.
+
+## 4. Third-party components
+
+- Components such as the **Godot Engine**, **.NET** runtime, and any libraries or media used under their own licenses **remain** under their **respective** licenses. Nothing in this file is intended to re-license third-party code.
+
+## 5. Limitation of liability
+
+- To the maximum extent permitted by law, the **rights holder** and contributors **are not** liable for any **damages** arising from use of the game or the source.
+
+---
+
+# Условия (русскоязычная версия, смысл совпадает)
+
+## 1. Сама игра (сборка / игра в сторе)
+
+- Игра **распространяется бесплатно** для игроков (без платы за приложение в том виде, в каком его распространяет правообладатель).
+- **Запрещено** **коммерческое** использование **игры, ресурсов и бренда** (в том числе перепродажа, встраивание в платные продукты) **без** предварительного **письменного** разрешения правообладателя.
+- Игра предоставляется **“как есть” (as is)** — **без каких-либо гарантий**, в том числе пригодности для конкретной цели. См. п. 5.
+
+## 2. Исходный код в этом репозитории
+
+- **Разрешено** **некоммерческое** использование **исходного кода** (включая копирование, изучение и правки) — личные цели, обучение, **некоммерческие** проекты без извлечения прибыли.
+- **Запрещено** **коммерческое** использование **исходного кода** (в том числе **изменённого**) **без** предварительного **письменного** разрешения правообладателя, включая продажу, использование в платных услугах или в продуктах с коммерческой выгодой.
+- Распространение исходного кода или произведённых на его основе работ (в том числе **безвозмездно**) **допускается** только с сохранением настоящей лицензии, без снятия с неё ссылки и без создания впечатления, что Vardo Games одобряет вашу версию.
+
+## 3. Товарные знаки и бренд
+
+- Названия **Vardo Games** и **Vardo**, а также логотипы и иные товарные обозначения Vardo Games (в т.ч. в игре и в репозитории) являются собственностью **Vardo** (или указываемого юрлица). Использование таких наименований и знаков в ваших товарах, услугах и рекламе без письменного разрешения правообладателя не допускается, кроме случаев, прямо разрешённых применимым правом (в т.ч. добросовестного указания связи с данным репозиторием, если это допустимо в вашей юрисдикции).
+
+## 4. Сторонние компоненты
+
+- Godot, .NET, библиотеки и материалы с **собственными** лицензиями **остаются** на условиях **этих** лицензий. Настоящий документ **не** перелицензирует чужой код.
+
+## 5. Ограничение ответственности
+
+- В максимальной степени, допустимой законом, **правообладатель** и **авторы** **не** несут ответственности за **ущерб** от использования игры или кода.

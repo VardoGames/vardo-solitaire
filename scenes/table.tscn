@@ -1,0 +1,734 @@
+[gd_scene format=3 uid="uid://b8table01sol"]
+
+[ext_resource type="Script" uid="uid://cdawxy0jisuk5" path="res://scripts/Table.cs" id="1_table"]
+[ext_resource type="Texture2D" uid="uid://cg03k74il5aiy" path="res://sprites/table.jpg" id="2_tablebg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_topbar"]
+bg_color = Color(0.14, 0.15, 0.18, 1)
+border_width_bottom = 1
+border_color = Color(0.06, 0.07, 0.09, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_victory_panel"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.11, 0.14, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.42, 0.5, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vic_btn_n"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.18, 0.2, 0.24, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.57, 0.65, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vic_btn_h"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.22, 0.24, 0.29, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.66, 0.74, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vic_btn_p"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.12, 0.13, 0.16, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.42, 0.5, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Table" type="VBoxContainer" unique_id=1113450108]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_table")
+
+[node name="TopBarPanel" type="PanelContainer" parent="." unique_id=2110971218]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_topbar")
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBarPanel" unique_id=2110971217]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="TopBar" type="HBoxContainer" parent="TopBarPanel/MarginContainer" unique_id=2110971219]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ScoreTimeRow" type="HBoxContainer" parent="TopBarPanel/MarginContainer/TopBar" unique_id=2110971215]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 6
+
+[node name="ScoreLabel" type="Label" parent="TopBarPanel/MarginContainer/TopBar/ScoreTimeRow" unique_id=937146439]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Score: 0"
+vertical_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="TopBarPanel/MarginContainer/TopBar/ScoreTimeRow" unique_id=937146438]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Time: 0:00"
+vertical_alignment = 1
+
+[node name="UndoButton" type="Button" parent="TopBarPanel/MarginContainer/TopBar/ScoreTimeRow" unique_id=517212331]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+disabled = true
+text = "Undo"
+
+[node name="TopBarSpacer" type="Control" parent="TopBarPanel/MarginContainer/TopBar" unique_id=517212332]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionsRow" type="HBoxContainer" parent="TopBarPanel/MarginContainer/TopBar" unique_id=2110971214]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NewDealButton" type="Button" parent="TopBarPanel/MarginContainer/TopBar/ActionsRow" unique_id=527639901]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "New game"
+
+[node name="SettingsButton" type="Button" parent="TopBarPanel/MarginContainer/TopBar/ActionsRow" unique_id=1716046042]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Settings"
+
+[node name="PlayArea" type="Control" parent="." unique_id=1083615971]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TableBackground" type="TextureRect" parent="PlayArea" unique_id=1083615972]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_tablebg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PlayAreaCenter" type="HBoxContainer" parent="PlayArea" unique_id=1083615974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayCenterLeft" type="Control" parent="PlayArea/PlayAreaCenter" unique_id=1083615975]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayStack" type="VBoxContainer" parent="PlayArea/PlayAreaCenter" unique_id=1083615973]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="PlayCenterTop" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack" unique_id=2029820891]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="TopRow" type="HBoxContainer" parent="PlayArea/PlayAreaCenter/PlayStack" unique_id=1408984715]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="RightBox" type="HBoxContainer" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow" unique_id=951519847]
+layout_mode = 2
+size_flags_stretch_ratio = 4.0
+
+[node name="F0" type="TextureRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox" unique_id=1075645721]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox/F0" unique_id=2141847675]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="F1" type="TextureRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox" unique_id=1901894044]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox/F1" unique_id=1841512801]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="F2" type="TextureRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox" unique_id=694538479]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox/F2" unique_id=1658304058]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="F3" type="TextureRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox" unique_id=632671396]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/RightBox/F3" unique_id=1212507869]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="StockWasteBlock" type="HBoxContainer" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow" unique_id=428522952]
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+
+[node name="WasteCell" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/StockWasteBlock" unique_id=479796722]
+custom_minimum_size = Vector2(160, 112)
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/StockWasteBlock/WasteCell" unique_id=1344511997]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="StockCell" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/StockWasteBlock" unique_id=759577968]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TopRow/StockWasteBlock/StockCell" unique_id=1077114508]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="TableauRow" type="HBoxContainer" parent="PlayArea/PlayAreaCenter/PlayStack" unique_id=645532863]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TableauLeft" type="HBoxContainer" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow" unique_id=-466478591]
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+
+[node name="T0" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauLeft" unique_id=293348938]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauLeft/T0" unique_id=1693585078]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="T1" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauLeft" unique_id=315047545]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauLeft/T1" unique_id=1846821444]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="T2" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauLeft" unique_id=1227864409]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauLeft/T2" unique_id=466202220]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="TableauRight" type="HBoxContainer" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow" unique_id=-466478590]
+layout_mode = 2
+size_flags_stretch_ratio = 4.0
+
+[node name="T3" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight" unique_id=259555162]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight/T3" unique_id=1258740644]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="T4" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight" unique_id=489929268]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight/T4" unique_id=28367777]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="T5" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight" unique_id=113861244]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight/T5" unique_id=66265553]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="T6" type="Control" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight" unique_id=1348941130]
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotShadow" type="ColorRect" parent="PlayArea/PlayAreaCenter/PlayStack/TableauRow/TableauRight/T6" unique_id=1163973766]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 112.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="PlayCenterRight" type="Control" parent="PlayArea/PlayAreaCenter" unique_id=1083615976]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=-389934589]
+layer = 20
+
+[node name="SettingsWindow" type="Window" parent="SettingsLayer" unique_id=-389934588]
+oversampling_override = 1.0
+title = "Settings"
+initial_position = 2
+size = Vector2i(480, 560)
+visible = false
+exclusive = true
+unresizable = true
+min_size = Vector2i(400, 540)
+
+[node name="Margin" type="MarginContainer" parent="SettingsLayer/SettingsWindow" unique_id=-389934587]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="SettingsLayer/SettingsWindow/Margin" unique_id=-389934586]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LanguageLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420013]
+layout_mode = 2
+text = "Language"
+
+[node name="LanguageOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420014]
+layout_mode = 2
+
+[node name="StockLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934585]
+layout_mode = 2
+text = "Draw from stock"
+
+[node name="StockDrawOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934584]
+layout_mode = 2
+
+[node name="ScoringLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934583]
+layout_mode = 2
+text = "Scoring"
+
+[node name="ScoringOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934582]
+layout_mode = 2
+
+[node name="VegasCumulativeCheck" type="CheckBox" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934581]
+layout_mode = 2
+text = "Cumulative Vegas (streaks)"
+
+[node name="TimedGameCheck" type="CheckBox" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934580]
+layout_mode = 2
+text = "Timed game"
+
+[node name="OrientationLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=395621505]
+layout_mode = 2
+text = "Screen orientation"
+
+[node name="ScreenOrientationOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=395621504]
+layout_mode = 2
+
+[node name="PresetLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934574]
+layout_mode = 2
+text = "Presets"
+
+[node name="PresetRow" type="HBoxContainer" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934573]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BtnPresetClassic" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/PresetRow" unique_id=-389934572]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Classic"
+
+[node name="BtnPresetRelax" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/PresetRow" unique_id=-389934571]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Relaxed"
+
+[node name="BtnPresetVegas" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/PresetRow" unique_id=-389934570]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vegas"
+
+[node name="HSeparator" type="HSeparator" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934579]
+layout_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934578]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BtnSavePlayOut" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/ButtonRow" unique_id=-389934577]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+text = "Play out"
+
+[node name="BtnNewGame" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/ButtonRow" unique_id=-389934576]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+text = "New deal"
+
+[node name="BtnCancel" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/ButtonRow" unique_id=-389934575]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "Cancel"
+
+[node name="SettingsBottomSpacer" type="Control" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420012]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DevLinkRow" type="CenterContainer" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420010]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="DevSiteLink" type="LinkButton" parent="SettingsLayer/SettingsWindow/Margin/VBox/DevLinkRow" unique_id=1884420011]
+layout_mode = 2
+text = "VardoGames.com"
+underline = 2
+uri = "https://vardogames.com/"
+
+[node name="GameEndLayer" type="CanvasLayer" parent="." unique_id=1884420020]
+layer = 30
+
+[node name="DragLayer" type="CanvasLayer" parent="." unique_id=-389934591]
+layer = 10
+
+[node name="DragHand" type="Control" parent="DragLayer" unique_id=-389934590]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="InvariantDialog" type="AcceptDialog" parent="." unique_id=386947433]
+oversampling_override = 1.0
+title = "Solitaire"
+ok_button_text = "OK"
+dialog_text = "Table state was invalid. A new deal was started."
+
+[node name="GameEndDialog" type="Control" parent="GameEndLayer" unique_id=386947435]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Dim" type="ColorRect" parent="GameEndLayer/GameEndDialog" unique_id=3869474331]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+mouse_filter = 2
+
+[node name="DialogCenter" type="CenterContainer" parent="GameEndLayer/GameEndDialog" unique_id=3869474330]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="DialogPanel" type="PanelContainer" parent="GameEndLayer/GameEndDialog/DialogCenter" unique_id=3869474349]
+custom_minimum_size = Vector2(500, 260)
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_victory_panel")
+
+[node name="Margin" type="MarginContainer" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel" unique_id=386947436]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin" unique_id=386947437]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GameEndTitle" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947442]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = "You win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/line_spacing = 0
+autowrap_mode = 2
+
+[node name="SpacerPreBody" type="Control" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947445]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GameEndPartyStack" type="VBoxContainer" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947452]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Party0" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/GameEndPartyStack" unique_id=386947453]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = "This game"
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Party1" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/GameEndPartyStack" unique_id=386947454]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Party2" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/GameEndPartyStack" unique_id=386947455]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Party3" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/GameEndPartyStack" unique_id=386947456]
+visible = false
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="HasBestGroup" type="VBoxContainer" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947447]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SpacerBeforeBest" type="Control" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup" unique_id=386947448]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GameEndSeparator" type="HSeparator" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup" unique_id=386947449]
+layout_mode = 2
+
+[node name="SpacerAfterSeparator" type="Control" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup" unique_id=386947450]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GameEndBestStack" type="VBoxContainer" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup" unique_id=386947457]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Best0" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947451]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Best1" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947458]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.78, 0.8, 0.85, 1)
+
+[node name="Best2" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947459]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Best3" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947460]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Best4" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947461]
+visible = false
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="SpacerPreButtons" type="Control" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947446]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947439]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="GameEndClose" type="Button" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/ButtonRow" unique_id=386947440]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_vic_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vic_btn_h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vic_btn_p")
+text = "Close"
+
+[node name="GameEndAgain" type="Button" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/ButtonRow" unique_id=386947441]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_vic_btn_n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vic_btn_h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vic_btn_p")
+text = "New game"
