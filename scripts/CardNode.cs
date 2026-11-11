@@ -35,6 +35,7 @@ public partial class CardNode : Control
         string path = CardPaths.FacePng(card);
         var faceTex = ResourceLoader.Load<Texture2D>(path);
 
+        // Card textures are larger than they are shown; mipmaps keep thin lines smooth.
         node._face = new TextureRect
         {
             Size = cardSize,
@@ -42,6 +43,7 @@ public partial class CardNode : Control
             StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
             ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
             Texture = faceTex,
+            TextureFilter = TextureFilterEnum.LinearWithMipmaps,
             MouseFilter = MouseFilterEnum.Ignore,
         };
 
@@ -52,6 +54,7 @@ public partial class CardNode : Control
             StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
             ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
             Texture = GetBackTexture(),
+            TextureFilter = TextureFilterEnum.LinearWithMipmaps,
             MouseFilter = MouseFilterEnum.Ignore,
         };
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv72crb3wr8wf"
-path="res://.godot/imported/VardoLogo.png-80900a920aa0fcdfa592028fa4ef858c.ctex"
+uid="uid://begqb5q67vhs3"
+path="res://.godot/imported/adaptive_bg.png-35d39f3248a2479828b16cd29fab4343.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/VardoLogo.png"
-dest_files=["res://.godot/imported/VardoLogo.png-80900a920aa0fcdfa592028fa4ef858c.ctex"]
+source_file="res://sprites/icon/adaptive_bg.png"
+dest_files=["res://.godot/imported/adaptive_bg.png-35d39f3248a2479828b16cd29fab4343.ctex"]
 
 [params]
 

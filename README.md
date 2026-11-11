@@ -65,6 +65,7 @@ The full terms for this project are in the repository root: **[`LICENSE`](LICENS
 
 - **[Godot Engine](https://godotengine.org/)** — [license](https://github.com/godotengine/godot/blob/master/LICENSE.txt)
 - **.NET** — [MIT license](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT)
+- **Court card art** (jacks, queens, kings) — [Vector Playing Cards](https://github.com/notpeter/Vector-Playing-Cards) by Byron Knoll, public domain (see `tools/court-art/README.md`)
 
 ## Author
 
