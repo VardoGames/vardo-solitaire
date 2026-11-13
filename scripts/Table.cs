@@ -1265,6 +1265,17 @@ public partial class Table : VBoxContainer
         _timerLabel.Text = I18n.Tf("hud.timer", $"{m}:{s:D2}");
     }
 
+    // Reserve room for the widest likely value so the Undo button does not move when
+    // the score or the clock changes (depends on language and the current font size).
+    static void ReserveLabelWidth(Label label, string widestText)
+    {
+        Font font = label.GetThemeFont("font");
+        int size = label.GetThemeFontSize("font_size");
+        float w = Mathf.Ceil(font.GetStringSize(widestText, HorizontalAlignment.Left, -1, size).X) + 4f;
+        if (!Mathf.IsEqualApprox(label.CustomMinimumSize.X, w))
+            label.CustomMinimumSize = new Vector2(w, label.CustomMinimumSize.Y);
+    }
+
     void RefreshView()
     {
         if (_game == null)
@@ -1272,6 +1283,8 @@ public partial class Table : VBoxContainer
 
         RecalculateTableauOverlapForTableauPiles();
 
+        ReserveLabelWidth(_scoreLabel, I18n.Tf("hud.score", "-8888"));
+        ReserveLabelWidth(_timerLabel, I18n.Tf("hud.timer", "88:88"));
         _scoreLabel.Text = I18n.Tf("hud.score", _game.Score);
         UpdateTimerDisplay();
         SetProcess(_rules.TimedGame);
