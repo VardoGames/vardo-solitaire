@@ -258,6 +258,7 @@ public partial class Table : VBoxContainer
         }
         ScheduleRefreshView();
         CallDeferred(nameof(DeferredLayoutAfterFirstFrame));
+        Callable.From(FitSettingsWindow).CallDeferred();
     }
 
     void OnInvariantDialogConfirmed()
@@ -339,7 +340,7 @@ public partial class Table : VBoxContainer
         // On a wide screen the width alone would give cards too tall for the table: keep room
         // for the top row plus a dealt column of seven cards (one card + six 20% overlaps).
         float barH = _topBarPanel.Size.Y > 1f ? _topBarPanel.Size.Y : 60f;
-        float playH = GetViewport().GetVisibleRect().Size.Y - barH;
+        float playH = GetViewport().GetVisibleRect().Size.Y - OffsetTop - barH;
         float maxCardH = (playH - 40f) / 3.3f;
         if (maxCardH > 1f && wPerCol * ar > maxCardH)
             wPerCol = maxCardH / ar;
@@ -386,6 +387,20 @@ public partial class Table : VBoxContainer
         var bar = GetNode<MarginContainer>("TopBarPanel/MarginContainer");
         bar.AddThemeConstantOverride("margin_left", x);
         bar.AddThemeConstantOverride("margin_right", x);
+        // In portrait the camera cutout sits over the top bar, so the whole table moves below it
+        // and the strip above stays black (the clear color). Landscape ignores the cutout.
+        OffsetTop = PortraitCutoutInset();
+    }
+
+    float PortraitCutoutInset()
+    {
+        if (!OS.HasFeature("mobile")) return 0f;
+        Vector2I win = DisplayServer.WindowGetSize();
+        if (win.X <= 0 || win.Y <= win.X) return 0f;
+        Rect2I safe = DisplayServer.GetDisplaySafeArea();
+        int top = safe.Position.Y - DisplayServer.WindowGetPosition().Y;
+        if (safe.Size.Y <= 0 || top <= 0) return 0f;
+        return top * GetViewport().GetVisibleRect().Size.Y / win.Y;
     }
 
     void ApplyCellCardSizes()
@@ -496,6 +511,8 @@ public partial class Table : VBoxContainer
             ApplyOrientationToSettingsUi(orientation);
         ApplyLanguageToSettingsUi(lang);
         if (_game != null) RefreshView();
+        // Texts in another language have another width: refit the open window.
+        Callable.From(FitSettingsWindow).CallDeferred();
     }
 
     void FillOptionButtonStockScoringOrientation()
@@ -1283,7 +1300,7 @@ public partial class Table : VBoxContainer
 
         RecalculateTableauOverlapForTableauPiles();
 
-        ReserveLabelWidth(_scoreLabel, I18n.Tf("hud.score", "-8888"));
+        ReserveLabelWidth(_scoreLabel, I18n.Tf("hud.score", "999"));
         ReserveLabelWidth(_timerLabel, I18n.Tf("hud.timer", "88:88"));
         _scoreLabel.Text = I18n.Tf("hud.score", _game.Score);
         UpdateTimerDisplay();
