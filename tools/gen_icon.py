@@ -81,11 +81,15 @@ def face(w, h, suit, mono=False):
 
 def back(w, h, mono=False):
     m = card_mask(w, h)
-    if mono:
-        im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-        im.paste((255, 255, 255, 255), (0, 0), m)
-        return im
     src = Image.open(res("sprites", "cards", "Vardo.png")).convert("RGBA").resize((w, h), Image.LANCZOS)
+    if mono:
+        # White card with the wagon mark cut out (the thin frame line is left out).
+        mark = src.convert("L").point(lambda v: 255 if v > 140 else 0)
+        keep = Image.new("L", (w, h), 0)
+        keep.paste(mark.crop((int(w * 0.12), int(h * 0.3), int(w * 0.88), int(h * 0.7))), (int(w * 0.12), int(h * 0.3)))
+        im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        im.paste((255, 255, 255, 255), (0, 0), ImageChops.subtract(m, keep))
+        return im
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     im.paste(src, (0, 0), m)
     ImageDraw.Draw(im).rounded_rectangle([0, 0, w - 1, h - 1], radius=int(w * 0.08),
@@ -100,9 +104,9 @@ def cards(k, mono=False):
     c = N * SS / 2
     off = 140 * k * SS
     return [
-        (back(w, h, mono), c - off, c + 30 * k * SS, 18),
-        (face(w, h, "heart", mono), c, c, 0),
-        (face(w, h, "spade", mono), c + off, c + 30 * k * SS, -18),
+        (face(w, h, "heart", mono), c - off, c + 30 * k * SS, 18),
+        (face(w, h, "spade", mono), c, c, 0),
+        (back(w, h, mono), c + off, c + 30 * k * SS, -18),   # the Vardo card on top
     ]
 
 

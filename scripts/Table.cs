@@ -118,7 +118,7 @@ public partial class Table : VBoxContainer
         _gameEndBest4 = GetNode<Label>(endV + "/" + bSt + "Best4");
         GetNode<Button>(endV + "/ButtonRow/GameEndClose").Pressed += OnGameEndClose;
         GetNode<Button>(endV + "/ButtonRow/GameEndAgain").Pressed += OnGameEndAgain;
-        const string settingsVBox = "SettingsLayer/SettingsWindow/Margin/VBox/";
+        const string settingsVBox = "SettingsLayer/SettingsWindow/Margin/Scroll/VBox/";
         _settingsWindow = GetNode<Window>("SettingsLayer/SettingsWindow");
         _stockDrawOption = GetNode<OptionButton>(settingsVBox + "StockDrawOption");
         _scoringOption = GetNode<OptionButton>(settingsVBox + "ScoringOption");
@@ -325,7 +325,7 @@ public partial class Table : VBoxContainer
 
     bool UpdateLayoutFromViewport()
     {
-        ApplySafeAreaInsets();
+        ApplyScreenPadding();
         float w = GetViewport().GetVisibleRect().Size.X;
         if (w < 32f)
         {
@@ -335,35 +335,57 @@ public partial class Table : VBoxContainer
             return false;
         }
         float wPerCol = Mathf.Min(w * 0.94f / 7f, 180f);
-        wPerCol = Mathf.Max(wPerCol, 18f);
         float ar = _baseCardSize.X > 0.01f ? _baseCardSize.Y / _baseCardSize.X : 1.4f;
+        // On a wide screen the width alone would give cards too tall for the table: keep room
+        // for the top row plus a dealt column of seven cards (one card + six 20% overlaps).
+        float barH = _topBarPanel.Size.Y > 1f ? _topBarPanel.Size.Y : 60f;
+        float playH = GetViewport().GetVisibleRect().Size.Y - barH;
+        float maxCardH = (playH - 40f) / 3.3f;
+        if (maxCardH > 1f && wPerCol * ar > maxCardH)
+            wPerCol = maxCardH / ar;
+        wPerCol = Mathf.Max(wPerCol, 18f);
         _cardSize = new Vector2(wPerCol, wPerCol * ar);
         _tableauOverlap = DefaultTableauOverlapForCardSize(_cardSize);
         _wasteFanDx = Mathf.Max(6f, _cardSize.X * 0.34f);
         return true;
     }
 
-    void ApplySafeAreaInsets()
+    // Phones with rounded screen corners clip whatever sits right at the edge, so the
+    // top bar keeps extra room on both sides. The camera cutout is ignored on purpose:
+    // cards rarely reach it and are wide enough not to be hidden by it.
+    const int TopBarMarginX = 10;
+    const int MobileCornerPaddingX = 28;
+
+    const int BaseFontSize = 22;
+
+    // The viewport is stretched from a 720 x 900 portrait base, so in landscape a phone scales
+    // everything by its height and the text gets smaller than in portrait. Scale the theme font
+    // back up so text keeps the same physical size in both orientations.
+    void ApplyUiScale()
     {
-        Vector2 vp = GetViewport().GetVisibleRect().Size;
-        if (vp.X < 1f || vp.Y < 1f) return;
-        Rect2I safe = DisplayServer.GetDisplaySafeArea();
-        if (safe.Size.X <= 0 || safe.Size.Y <= 0)
+        Theme? theme = ThemeDB.GetProjectTheme();
+        if (theme is null) return;
+        float factor = 1f;
+        Vector2I win = DisplayServer.WindowGetSize();
+        if (OS.HasFeature("mobile") && win.X > 0 && win.Y > 0)
         {
-            OffsetLeft = 0;
-            OffsetTop = 0;
-            OffsetRight = 0;
-            OffsetBottom = 0;
-            return;
+            float portraitScale = Mathf.Min(win.X, win.Y) / 720f;
+            float currentScale = Mathf.Min(win.X / 720f, win.Y / 900f);
+            factor = Mathf.Clamp(portraitScale / currentScale, 1f, 1.5f);
         }
-        float left = Mathf.Max(0f, safe.Position.X);
-        float top = Mathf.Max(0f, safe.Position.Y);
-        float right = Mathf.Max(0f, vp.X - (safe.Position.X + safe.Size.X));
-        float bottom = Mathf.Max(0f, vp.Y - (safe.Position.Y + safe.Size.Y));
-        OffsetLeft = left;
-        OffsetTop = top;
-        OffsetRight = -right;
-        OffsetBottom = -bottom;
+        int size = Mathf.RoundToInt(BaseFontSize * factor);
+        if (theme.DefaultFontSize != size)
+            theme.DefaultFontSize = size;
+        _settingsWindow?.AddThemeFontSizeOverride("title_font_size", size);
+    }
+
+    void ApplyScreenPadding()
+    {
+        ApplyUiScale();
+        int x = TopBarMarginX + (OS.HasFeature("mobile") ? MobileCornerPaddingX : 0);
+        var bar = GetNode<MarginContainer>("TopBarPanel/MarginContainer");
+        bar.AddThemeConstantOverride("margin_left", x);
+        bar.AddThemeConstantOverride("margin_right", x);
     }
 
     void ApplyCellCardSizes()
@@ -409,7 +431,8 @@ public partial class Table : VBoxContainer
     void OnSettingsPressed()
     {
         PopulateSettingsFromFile();
-        _settingsWindow.PopupCentered();
+        _settingsWindow.PopupCentered(SettingsWindowSize());
+        Callable.From(FitSettingsWindow).CallDeferred();
     }
 
     void PopulateSettingsFromFile()
@@ -509,7 +532,7 @@ public partial class Table : VBoxContainer
 
     void ApplyAllUiText()
     {
-        const string v = "SettingsLayer/SettingsWindow/Margin/VBox/";
+        const string v = "SettingsLayer/SettingsWindow/Margin/Scroll/VBox/";
         _newGameButton.Text = I18n.T("hud.newGame");
         _settingsButton.Text = I18n.T("hud.settings");
         _undoButton.Text = I18n.T("hud.undo");
@@ -602,6 +625,31 @@ public partial class Table : VBoxContainer
             2 => DisplayServer.ScreenOrientation.Sensor,
             _ => DisplayServer.ScreenOrientation.Portrait,
         };
+    }
+
+    // Fit the settings window to its content, but never taller than the screen:
+    // in landscape on a phone the rest scrolls inside the window.
+    Vector2I SettingsWindowSize()
+    {
+        var margin = GetNode<MarginContainer>("SettingsLayer/SettingsWindow/Margin");
+        Vector2 content = GetNode<Control>("SettingsLayer/SettingsWindow/Margin/Scroll/VBox").GetCombinedMinimumSize();
+        float padX = margin.GetThemeConstant("margin_left") + margin.GetThemeConstant("margin_right");
+        float padY = margin.GetThemeConstant("margin_top") + margin.GetThemeConstant("margin_bottom");
+        Vector2 vp = GetViewport().GetVisibleRect().Size;
+        float title = _settingsWindow.GetThemeConstant("title_height");
+        float w = Mathf.Min(Mathf.Max(content.X + padX + 24f, 560f), vp.X - 24f);
+        float h = Mathf.Min(content.Y + padY + 8f, vp.Y - title - 24f);
+        return new Vector2I(Mathf.RoundToInt(w), Mathf.RoundToInt(h));
+    }
+
+    // Texts are refreshed right before the popup, so measure again once they are laid out.
+    void FitSettingsWindow()
+    {
+        if (!_settingsWindow.Visible) return;
+        Vector2I size = SettingsWindowSize();
+        if (size == _settingsWindow.Size) return;
+        _settingsWindow.Size = size;
+        _settingsWindow.MoveToCenter();
     }
 
     void OnSettingsSavePlayOut()

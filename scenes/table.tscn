@@ -366,14 +366,14 @@ size_flags_vertical = 3
 layer = 20
 
 [node name="SettingsWindow" type="Window" parent="SettingsLayer" unique_id=-389934588]
-oversampling_override = 1.0
 title = "Settings"
 initial_position = 2
-size = Vector2i(480, 560)
+size = Vector2i(600, 640)
 visible = false
 exclusive = true
 unresizable = true
-min_size = Vector2i(400, 540)
+min_size = Vector2i(400, 300)
+theme_override_font_sizes/title_font_size = 22
 
 [node name="Margin" type="MarginContainer" parent="SettingsLayer/SettingsWindow" unique_id=-389934587]
 anchors_preset = 15
@@ -386,104 +386,110 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBox" type="VBoxContainer" parent="SettingsLayer/SettingsWindow/Margin" unique_id=-389934586]
+[node name="Scroll" type="ScrollContainer" parent="SettingsLayer/SettingsWindow/Margin" unique_id=1771300501]
 layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBox" type="VBoxContainer" parent="SettingsLayer/SettingsWindow/Margin/Scroll" unique_id=-389934586]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="LanguageLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420013]
+[node name="LanguageLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=1884420013]
 layout_mode = 2
 text = "Language"
 
-[node name="LanguageOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420014]
+[node name="LanguageOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=1884420014]
 layout_mode = 2
 
-[node name="StockLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934585]
+[node name="StockLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934585]
 layout_mode = 2
 text = "Draw from stock"
 
-[node name="StockDrawOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934584]
+[node name="StockDrawOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934584]
 layout_mode = 2
 
-[node name="ScoringLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934583]
+[node name="ScoringLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934583]
 layout_mode = 2
 text = "Scoring"
 
-[node name="ScoringOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934582]
+[node name="ScoringOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934582]
 layout_mode = 2
 
-[node name="VegasCumulativeCheck" type="CheckBox" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934581]
+[node name="VegasCumulativeCheck" type="CheckBox" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934581]
 layout_mode = 2
 text = "Cumulative Vegas (streaks)"
 
-[node name="TimedGameCheck" type="CheckBox" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934580]
+[node name="TimedGameCheck" type="CheckBox" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934580]
 layout_mode = 2
 text = "Timed game"
 
-[node name="OrientationLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=395621505]
+[node name="OrientationLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=395621505]
 layout_mode = 2
 text = "Screen orientation"
 
-[node name="ScreenOrientationOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=395621504]
+[node name="ScreenOrientationOption" type="OptionButton" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=395621504]
 layout_mode = 2
 
-[node name="PresetLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934574]
+[node name="PresetLabel" type="Label" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934574]
 layout_mode = 2
 text = "Presets"
 
-[node name="PresetRow" type="HBoxContainer" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934573]
+[node name="PresetRow" type="HBoxContainer" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934573]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="BtnPresetClassic" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/PresetRow" unique_id=-389934572]
+[node name="BtnPresetClassic" type="Button" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox/PresetRow" unique_id=-389934572]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Classic"
 
-[node name="BtnPresetRelax" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/PresetRow" unique_id=-389934571]
+[node name="BtnPresetRelax" type="Button" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox/PresetRow" unique_id=-389934571]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Relaxed"
 
-[node name="BtnPresetVegas" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/PresetRow" unique_id=-389934570]
+[node name="BtnPresetVegas" type="Button" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox/PresetRow" unique_id=-389934570]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vegas"
 
-[node name="HSeparator" type="HSeparator" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934579]
+[node name="HSeparator" type="HSeparator" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934579]
 layout_mode = 2
 
-[node name="ButtonRow" type="HBoxContainer" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=-389934578]
+[node name="ButtonRow" type="HBoxContainer" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=-389934578]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="BtnSavePlayOut" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/ButtonRow" unique_id=-389934577]
+[node name="BtnSavePlayOut" type="Button" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox/ButtonRow" unique_id=-389934577]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 text = "Play out"
 
-[node name="BtnNewGame" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/ButtonRow" unique_id=-389934576]
+[node name="BtnNewGame" type="Button" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox/ButtonRow" unique_id=-389934576]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 text = "New deal"
 
-[node name="BtnCancel" type="Button" parent="SettingsLayer/SettingsWindow/Margin/VBox/ButtonRow" unique_id=-389934575]
+[node name="BtnCancel" type="Button" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox/ButtonRow" unique_id=-389934575]
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 text = "Cancel"
 
-[node name="SettingsBottomSpacer" type="Control" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420012]
+[node name="SettingsBottomSpacer" type="Control" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=1884420012]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DevLinkRow" type="CenterContainer" parent="SettingsLayer/SettingsWindow/Margin/VBox" unique_id=1884420010]
+[node name="DevLinkRow" type="CenterContainer" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox" unique_id=1884420010]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="DevSiteLink" type="LinkButton" parent="SettingsLayer/SettingsWindow/Margin/VBox/DevLinkRow" unique_id=1884420011]
+[node name="DevSiteLink" type="LinkButton" parent="SettingsLayer/SettingsWindow/Margin/Scroll/VBox/DevLinkRow" unique_id=1884420011]
 layout_mode = 2
 text = "VardoGames.com"
 underline = 2
@@ -501,7 +507,6 @@ anchors_preset = 0
 mouse_filter = 2
 
 [node name="InvariantDialog" type="AcceptDialog" parent="." unique_id=386947433]
-oversampling_override = 1.0
 title = "Solitaire"
 ok_button_text = "OK"
 dialog_text = "Table state was invalid. A new deal was started."
@@ -571,7 +576,7 @@ mouse_filter = 2
 text = "You win!"
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 33
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 theme_override_constants/line_spacing = 0
 autowrap_mode = 2
@@ -592,7 +597,7 @@ mouse_filter = 2
 text = "This game"
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Party1" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/GameEndPartyStack" unique_id=386947454]
@@ -602,7 +607,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Party2" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/GameEndPartyStack" unique_id=386947455]
@@ -612,7 +617,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Party3" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/GameEndPartyStack" unique_id=386947456]
@@ -623,7 +628,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="HasBestGroup" type="VBoxContainer" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947447]
@@ -655,7 +660,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Best1" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947458]
@@ -665,7 +670,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 19
 theme_override_colors/font_color = Color(0.78, 0.8, 0.85, 1)
 
 [node name="Best2" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947459]
@@ -675,7 +680,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Best3" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947460]
@@ -685,7 +690,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Best4" type="Label" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox/HasBestGroup/GameEndBestStack" unique_id=386947461]
@@ -696,7 +701,7 @@ mouse_filter = 2
 text = ""
 horizontal_alignment = 1
 autowrap_mode = 0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="SpacerPreButtons" type="Control" parent="GameEndLayer/GameEndDialog/DialogCenter/DialogPanel/Margin/VBox" unique_id=386947446]

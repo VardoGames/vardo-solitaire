@@ -32,6 +32,8 @@ project/assembly_name="Solitaire"
 
 [gui]
 
+theme/custom="res://theme.tres"
+theme/default_theme_scale=1.3
 theme/default_font_hinting=2
 theme/default_font_subpixel_positioning=0
 
