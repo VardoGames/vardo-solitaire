@@ -375,6 +375,15 @@ unresizable = true
 min_size = Vector2i(400, 300)
 theme_override_font_sizes/title_font_size = 22
 
+[node name="Background" type="ColorRect" parent="SettingsLayer/SettingsWindow" unique_id=1771300502]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.3, 0.3, 0.3, 1)
+
 [node name="Margin" type="MarginContainer" parent="SettingsLayer/SettingsWindow" unique_id=-389934587]
 anchors_preset = 15
 anchor_right = 1.0
